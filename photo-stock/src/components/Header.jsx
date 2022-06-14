@@ -27,7 +27,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/business/">
+                  href="https://www.pexels.com/search/business/"
+                  target="_blank"
+                  rel="noreferrer">
                   business
                 </a>
                 <span>,&nbsp;</span>
@@ -35,7 +37,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/space/">
+                  href="https://www.pexels.com/search/space/"
+                  target="_blank"
+                  rel="noreferrer">
                   space
                 </a>
                 <span>,&nbsp;</span>
@@ -43,7 +47,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/food/">
+                  href="https://www.pexels.com/search/food/"
+                  target="_blank"
+                  rel="noreferrer">
                   food
                 </a>
                 <span>,&nbsp;</span>
@@ -51,7 +57,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/summer/">
+                  href="https://www.pexels.com/search/summer/"
+                  target="_blank"
+                  rel="noreferrer">
                   summer
                 </a>
                 <span>,&nbsp;</span>
@@ -59,7 +67,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/technology/">
+                  href="https://www.pexels.com/search/technology/"
+                  target="_blank"
+                  rel="noreferrer">
                   technology
                 </a>
                 <span>,&nbsp;</span>
@@ -67,7 +77,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/forest/">
+                  href="https://www.pexels.com/search/forest/"
+                  target="_blank"
+                  rel="noreferrer">
                   forest
                 </a>
                 <span>,&nbsp;</span>
@@ -75,7 +87,9 @@ function Header() {
               <li>
                 <a
                   className="header-content-trending-item"
-                  href="https://www.pexels.com/search/beach/">
+                  href="https://www.pexels.com/search/beach/"
+                  target="_blank"
+                  rel="noreferrer">
                   beach
                 </a>
               </li>
