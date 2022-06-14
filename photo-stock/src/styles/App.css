@@ -23,6 +23,7 @@ a {
   --color-white: #ffffff;
   --color-light-gray: #a4a4a4;
   --color-gray: #7f7f7f;
+  --color-green: #05a081;
 }
 
 /* HEADER-START */
@@ -148,5 +149,75 @@ a {
 }
 
 /* HEADER-END */
+
+/* NAVBAR-START */
+
+.navbar {
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.navbar-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  gap: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.logo:hover {
+  filter: brightness(70%);
+}
+
+.logo-image {
+  height: 50px;
+  width: 50px;
+  border-radius: 10px;
+}
+
+.navbar-items {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.navbar-items li {
+  height: 100%;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  line-height: 100%;
+  transition: 0.5s;
+}
+
+.navbar-item.btn-join {
+  background-color: var(--color-green);
+  padding: 0 20px;
+  border-radius: 10px;
+}
+
+.navbar-item:hover {
+  filter: brightness(70%);
+}
+
+/* NAVBAR-END */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
