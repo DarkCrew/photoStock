@@ -41,6 +41,7 @@ a {
   max-width: 1440px;
   padding: 0 15px;
   margin: 0 auto;
+  color: inherit;
 }
 
 .header-content {
@@ -58,6 +59,7 @@ a {
 
 .header-search-container {
   display: flex;
+  width: 100%;
 }
 
 .header-content-search {
@@ -161,6 +163,13 @@ a {
   top: 0;
   right: 0;
   left: 0;
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+.navbar.active {
+  background-color: var(--color-white);
+  color: var(--color-dark-gray);
 }
 
 .navbar-container {
@@ -169,6 +178,8 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: inherit;
+  gap: 50px;
 }
 
 .logo {
@@ -178,6 +189,11 @@ a {
   gap: 20px;
   cursor: pointer;
   transition: 0.5s;
+  color: inherit;
+}
+
+.logo span {
+  color: inherit;
 }
 
 .logo:hover {
@@ -190,15 +206,67 @@ a {
   border-radius: 10px;
 }
 
+.navbar-search-container {
+  display: none;
+  width: 100%;
+}
+
+.navbar-search-container.active {
+  display: flex;
+  width: 100%;
+}
+
+.navbar-content-search {
+  height: 50px;
+  width: calc(100% - 50px);
+  padding: 15px 4px 15px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 0;
+  color: var(--color-gray);
+  background-color: var(--color-white);
+  filter: contrast(80%);
+}
+
+.navbar-content-search:active,
+:hover,
+:focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
+.navbar-search-btn {
+  height: 50px;
+  width: 50px;
+  background-color: var(--color-white);
+  filter: contrast(80%);
+  border: none;
+  outline: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.navbar-search-btn-image {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  filter: contrast(10%);
+  cursor: pointer;
+}
+
 .navbar-items {
   height: 40px;
   display: flex;
   align-items: center;
   gap: 50px;
+  color: inherit;
 }
 
 .navbar-items li {
   height: 100%;
+  color: inherit;
 }
 
 .navbar-item {
@@ -207,6 +275,7 @@ a {
   height: 100%;
   line-height: 100%;
   transition: 0.5s;
+  color: inherit;
 }
 
 .navbar-item.btn-join {
