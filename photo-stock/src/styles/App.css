@@ -23,6 +23,7 @@ a {
   --color-white: #ffffff;
   --color-light-gray: #a4a4a4;
   --color-gray: #7f7f7f;
+  --color-dark-gray: #2c343e;
   --color-green: #05a081;
 }
 
@@ -219,5 +220,39 @@ a {
 }
 
 /* NAVBAR-END */
+
+/* MAIN-START */
+
+.main {
+  padding: 0 80px;
+}
+
+.main-title-container {
+  display: flex;
+  height: 50px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.main-title {
+  display: flex;
+  align-items: center;
+  color: var(--color-dark-gray);
+}
+
+.images-container {
+  display: flex;
+  gap: 3.5%;
+  margin-top: 30px;
+}
+
+.images-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 31%;
+}
+
+/* MAIN-END */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
