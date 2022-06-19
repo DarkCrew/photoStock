@@ -5,7 +5,7 @@ function SearchForm() {
     <div className="header-search-container">
       <input
         type="search"
-        class="header-content-search"
+        className="header-content-search"
         placeholder="Search for free photos and videos"
       />
       <button className="header-search-btn">

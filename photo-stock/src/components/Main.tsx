@@ -3,7 +3,12 @@ import PhotoItem from './PhotoItem';
 
 const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
 
-const fetchImagesPexels = async (url) => {
+type fetchObj = {
+  id: 1;
+  src: {};
+};
+
+const fetchImagesPexels = async (url: string) => {
   const data = await fetch(url, {
     headers: {
       Authorization: API_KEY,
@@ -18,7 +23,7 @@ const fetchImagesPexels = async (url) => {
 function Main() {
   const [images, setImages] = useState([]);
   React.useEffect(() => {
-    const fetchImages = async (url) => {
+    const fetchImages = async (url: string) => {
       const images = await fetchImagesPexels(url);
       setImages(images);
     };
@@ -34,17 +39,17 @@ function Main() {
         </div>
         <div className="images-container">
           <div className="images-column">
-            {images.map((obj, index) =>
+            {images.map((obj: fetchObj, index) =>
               index >= 0 && index < 4 ? <PhotoItem key={obj.id} {...obj} /> : '',
             )}
           </div>
           <div className="images-column">
-            {images.map((obj, index) =>
+            {images.map((obj: fetchObj, index) =>
               index > 3 && index < 8 ? <PhotoItem key={obj.id} {...obj} /> : '',
             )}
           </div>
           <div className="images-column">
-            {images.map((obj, index) =>
+            {images.map((obj: fetchObj, index) =>
               index > 7 && index < 12 ? <PhotoItem key={obj.id} {...obj} /> : '',
             )}
           </div>

@@ -2,12 +2,15 @@ import React from 'react';
 
 import btnHeart from '../assets/img/heart.png';
 import btnDownload from '../assets/img/download.png';
+import { type } from '@testing-library/user-event/dist/type';
 
-function PhotoItem(props) {
+function PhotoItem(props: { id: number; key: number; src: object }) {
+  const imagesUrls: { medium?: string } = props.src;
+
   return (
     <div className="images-column-item">
       <div className="image-column-item">
-        <img src={props.src.medium} alt="photos-item"></img>
+        <img src={imagesUrls.medium} alt="photos-item"></img>
       </div>
       <div className="item-info">
         <div className="item-info-author">

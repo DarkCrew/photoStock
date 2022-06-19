@@ -11,7 +11,7 @@ function Header() {
           <div className="header-search-container">
             <input
               type="search"
-              class="header-content-search"
+              className="header-content-search"
               placeholder="Search for free photos and videos"
             />
             <button className="header-search-btn">
@@ -97,7 +97,7 @@ function Header() {
           </div>
         </div>
         <a
-          class="header-photo-publisher"
+          className="header-photo-publisher"
           href="https://www.pexels.com/photo/landscape-sky-hands-woman-11325889/"
           target="_blank"
           rel="noreferrer">

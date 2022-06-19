@@ -21,7 +21,7 @@ function Navbar() {
           <div className={navbar ? 'navbar-search-container active' : 'navbar-search-container'}>
             <input
               type="search"
-              class="navbar-content-search"
+              className="navbar-content-search"
               placeholder="Search for free photos and videos"
             />
             <button className="navbar-search-btn">
