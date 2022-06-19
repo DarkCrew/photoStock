@@ -1,9 +1,18 @@
 import React from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchImage } from '../redux/slices/imagesSlice';
+import { AppDispatch, RootState } from '../redux/store';
+
 function Header() {
   const [inputValue, setInputValue] = React.useState('');
+  const dispatch = useDispatch<AppDispatch>();
 
-  function searchNewInfo() {}
+  function searchNewInfo() {
+    if (inputValue !== '') {
+      dispatch(fetchImage(inputValue));
+    }
+  }
 
   return (
     <div className="header">

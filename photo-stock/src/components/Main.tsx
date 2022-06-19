@@ -1,35 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PhotoItem from './PhotoItem';
 
-export const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchImage } from '../redux/slices/imagesSlice';
+import { AppDispatch, RootState } from '../redux/store';
 
 type fetchObj = {
   id: 1;
   src: {};
 };
 
-const fetchImagesPexels = async (url: string) => {
-  const data = await fetch(url, {
-    headers: {
-      Authorization: API_KEY,
-    },
-  });
-
-  const { photos } = await data.json();
-
-  return photos;
-};
+const searchItem = 'car';
 
 function Main() {
-  const [images, setImages] = useState([]);
-  React.useEffect(() => {
-    const fetchImages = async (url: string) => {
-      const images = await fetchImagesPexels(url);
-      setImages(images);
-    };
+  const items = useSelector((state: RootState) => state.imagesReducer.items);
+  const dispatch = useDispatch<AppDispatch>();
 
-    fetchImages('https://api.pexels.com/v1/search?query=car&per_page=12');
-  }, []);
+  React.useEffect(() => {
+    dispatch(fetchImage(searchItem));
+  }, [dispatch]);
 
   return (
     <main className="main">
@@ -39,17 +28,17 @@ function Main() {
         </div>
         <div className="images-container">
           <div className="images-column">
-            {images.map((obj: fetchObj, index) =>
+            {items.map((obj: fetchObj, index) =>
               index >= 0 && index < 4 ? <PhotoItem key={obj.id} {...obj} /> : '',
             )}
           </div>
           <div className="images-column">
-            {images.map((obj: fetchObj, index) =>
+            {items.map((obj: fetchObj, index) =>
               index > 3 && index < 8 ? <PhotoItem key={obj.id} {...obj} /> : '',
             )}
           </div>
           <div className="images-column">
-            {images.map((obj: fetchObj, index) =>
+            {items.map((obj: fetchObj, index) =>
               index > 7 && index < 12 ? <PhotoItem key={obj.id} {...obj} /> : '',
             )}
           </div>
