@@ -1,6 +1,10 @@
 import React from 'react';
 
 function Header() {
+  const [inputValue, setInputValue] = React.useState('');
+
+  function searchNewInfo() {}
+
   return (
     <div className="header">
       <div className="container">
@@ -10,12 +14,15 @@ function Header() {
           </h1>
           <div className="header-search-container">
             <input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
               type="search"
               className="header-content-search"
               placeholder="Search for free photos and videos"
             />
             <button className="header-search-btn">
               <img
+                onClick={() => searchNewInfo()}
                 className="header-search-btn-image"
                 src="https://cdn-icons.flaticon.com/png/512/4024/premium/4024513.png?token=exp=1655210527~hmac=6df853562d1deebd4c30d6467ec306c6"
                 alt="search-button"></img>
