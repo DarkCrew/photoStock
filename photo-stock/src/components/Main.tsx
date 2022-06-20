@@ -1,5 +1,6 @@
 import React from 'react';
 import PhotoItem from './PhotoItem';
+import notFoundImage from '../assets/img/not-found.svg';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchImage } from '../redux/slices/imagesSlice';
@@ -26,23 +27,31 @@ function Main() {
         <div className="main-title-container">
           <h2 className="main-title">Free Stock Photos</h2>
         </div>
-        <div className="images-container">
-          <div className="images-column">
-            {items.map((obj: fetchObj, index) =>
-              index >= 0 && index < 4 ? <PhotoItem key={obj.id} {...obj} /> : '',
-            )}
+        {items.length === 0 ? (
+          <div className="images-not-found">
+            <img className="not-found-image" src={notFoundImage} alt="not-found"></img>
+            <h3 className="not-found-title">Try that again</h3>
+            <p className="not-found-subtitle">The search could not find a photo for your request</p>
           </div>
-          <div className="images-column">
-            {items.map((obj: fetchObj, index) =>
-              index > 3 && index < 8 ? <PhotoItem key={obj.id} {...obj} /> : '',
-            )}
+        ) : (
+          <div className="images-container">
+            <div className="images-column">
+              {items.map((obj: fetchObj, index) =>
+                index >= 0 && index < 4 ? <PhotoItem key={obj.id} {...obj} /> : '',
+              )}
+            </div>
+            <div className="images-column">
+              {items.map((obj: fetchObj, index) =>
+                index > 3 && index < 8 ? <PhotoItem key={obj.id} {...obj} /> : '',
+              )}
+            </div>
+            <div className="images-column">
+              {items.map((obj: fetchObj, index) =>
+                index > 7 && index < 12 ? <PhotoItem key={obj.id} {...obj} /> : '',
+              )}
+            </div>
           </div>
-          <div className="images-column">
-            {items.map((obj: fetchObj, index) =>
-              index > 7 && index < 12 ? <PhotoItem key={obj.id} {...obj} /> : '',
-            )}
-          </div>
-        </div>
+        )}
       </div>
     </main>
   );

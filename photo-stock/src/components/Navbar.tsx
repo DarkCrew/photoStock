@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import SearchForm from './SearchForm';
+
 import logo from '../assets/img/pexels-logo.svg';
 
 function Navbar() {
@@ -19,17 +21,18 @@ function Navbar() {
             <span>Pexels</span>
           </div>
           <div className={navbar ? 'navbar-search-container active' : 'navbar-search-container'}>
-            <input
+            {/* <input
               type="search"
-              className="navbar-content-search"
+              className="content-search"
               placeholder="Search for free photos and videos"
             />
-            <button className="navbar-search-btn">
+            <button className="search-btn">
               <img
-                className="navbar-search-btn-image"
+                className="search-btn-image"
                 src="https://cdn-icons.flaticon.com/png/512/4024/premium/4024513.png?token=exp=1655210527~hmac=6df853562d1deebd4c30d6467ec306c6"
                 alt="search-button"></img>
-            </button>
+            </button> */}
+            <SearchForm />
           </div>
           <ul className="navbar-items">
             <li>
