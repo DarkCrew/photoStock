@@ -35,6 +35,9 @@ export const imagesSlice = createSlice({
     builder.addCase(fetchImage.fulfilled, (state, action) => {
       state.items = action.payload;
       state.status = 'success';
+      if (state.items.length === 0) {
+        state.status = 'nothing';
+      }
     });
     builder.addCase(fetchImage.rejected, (state, action) => {
       state.status = 'error';

@@ -9,12 +9,13 @@ import { AppDispatch, RootState } from '../redux/store';
 type fetchObj = {
   id: 1;
   src: {};
+  photographer: string;
 };
 
 const searchItem = 'car';
 
 function Main() {
-  const items = useSelector((state: RootState) => state.imagesReducer.items);
+  const { items, status } = useSelector((state: RootState) => state.imagesReducer);
   const dispatch = useDispatch<AppDispatch>();
 
   React.useEffect(() => {
@@ -27,7 +28,7 @@ function Main() {
         <div className="main-title-container">
           <h2 className="main-title">Free Stock Photos</h2>
         </div>
-        {items.length === 0 ? (
+        {status === 'nothing' ? (
           <div className="images-not-found">
             <img className="not-found-image" src={notFoundImage} alt="not-found"></img>
             <h3 className="not-found-title">Try that again</h3>

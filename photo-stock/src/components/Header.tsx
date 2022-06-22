@@ -1,7 +1,16 @@
 import React from 'react';
+import CategoryNames from './CategoryNames';
 import SearchForm from './SearchForm';
 
 function Header() {
+  let arrCategoryIndex: number[] = [];
+
+  while (arrCategoryIndex.length < 7) {
+    const randomValue: number = Math.floor(Math.random() * 40);
+    if (arrCategoryIndex.indexOf(randomValue) > -1) continue;
+    arrCategoryIndex[arrCategoryIndex.length] = randomValue;
+  }
+
   return (
     <div className="header">
       <div className="container">
@@ -15,75 +24,9 @@ function Header() {
           <div className="header-content-trending">
             <span className="header-content-trending-title">Suggested:</span>
             <ul className="header-content-trending-items">
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/business/"
-                  target="_blank"
-                  rel="noreferrer">
-                  business
-                </a>
-                <span>,&nbsp;</span>
-              </li>
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/space/"
-                  target="_blank"
-                  rel="noreferrer">
-                  space
-                </a>
-                <span>,&nbsp;</span>
-              </li>
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/food/"
-                  target="_blank"
-                  rel="noreferrer">
-                  food
-                </a>
-                <span>,&nbsp;</span>
-              </li>
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/summer/"
-                  target="_blank"
-                  rel="noreferrer">
-                  summer
-                </a>
-                <span>,&nbsp;</span>
-              </li>
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/technology/"
-                  target="_blank"
-                  rel="noreferrer">
-                  technology
-                </a>
-                <span>,&nbsp;</span>
-              </li>
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/forest/"
-                  target="_blank"
-                  rel="noreferrer">
-                  forest
-                </a>
-                <span>,&nbsp;</span>
-              </li>
-              <li>
-                <a
-                  className="header-content-trending-item"
-                  href="https://www.pexels.com/search/beach/"
-                  target="_blank"
-                  rel="noreferrer">
-                  beach
-                </a>
-              </li>
+              {arrCategoryIndex.map((item: number, index: number) => (
+                <CategoryNames key={item} curNumber={item} curIndex={index} />
+              ))}
             </ul>
           </div>
         </div>
