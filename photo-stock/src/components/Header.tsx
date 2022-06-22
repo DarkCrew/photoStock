@@ -2,6 +2,16 @@ import React from 'react';
 import CategoryNames from './CategoryNames';
 import SearchForm from './SearchForm';
 
+const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
+
+type ImageInfo = {
+  src: {
+    landscape: string;
+  };
+  photographer: string;
+  photographer_url: string;
+};
+
 function Header() {
   let arrCategoryIndex: number[] = [];
 
@@ -10,6 +20,33 @@ function Header() {
     if (arrCategoryIndex.indexOf(randomValue) > -1) continue;
     arrCategoryIndex[arrCategoryIndex.length] = randomValue;
   }
+
+  const fetchTopImagesPexels = async (url: string) => {
+    const data = await fetch(url, {
+      headers: {
+        Authorization: API_KEY,
+      },
+    });
+
+    const { photos } = await data.json();
+
+    return photos;
+  };
+
+  const [topImages, setTopImages] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    const fetchImages = async (url: string) => {
+      const images = await fetchTopImagesPexels(url);
+      setTopImages(images);
+      setIsLoading(true);
+    };
+
+    fetchImages('https://api.pexels.com/v1/curated?per_page=40');
+  }, []);
+
+  const curTopImage: ImageInfo = topImages[arrCategoryIndex[0]];
 
   return (
     <div className="header">
@@ -30,18 +67,22 @@ function Header() {
             </ul>
           </div>
         </div>
-        <a
-          className="header-photo-publisher"
-          href="https://www.pexels.com/photo/landscape-sky-hands-woman-11325889/"
-          target="_blank"
-          rel="noreferrer">
-          <span className="header-photo-publisher-title">Photo by&nbsp;</span>
-          <span className="header-photo-publisher-name">Sebastiaan Stam</span>
-        </a>
-        <img
-          className="header-background"
-          src="https://images.pexels.com/photos/11325889/pexels-photo-11325889.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1400&dpr=1"
-          alt="background-header"></img>
+        {isLoading && (
+          <a
+            className="header-photo-publisher"
+            href={curTopImage.photographer_url}
+            target="_blank"
+            rel="noreferrer">
+            <span className="header-photo-publisher-title">Photo by&nbsp;</span>
+            <span className="header-photo-publisher-name">{curTopImage.photographer}</span>
+          </a>
+        )}
+        {isLoading && (
+          <img
+            className="header-background"
+            src={curTopImage.src.landscape}
+            alt="background-header"></img>
+        )}
       </div>
     </div>
   );
