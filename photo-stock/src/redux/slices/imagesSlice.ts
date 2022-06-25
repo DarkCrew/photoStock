@@ -2,19 +2,31 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
 
-export const fetchImage = createAsyncThunk('images/fetchImage', async (searchItem: string) => {
-  const data = await fetch(`https://api.pexels.com/v1/search?query=${searchItem}&per_page=12`, {
-    headers: {
-      Authorization: API_KEY,
-    },
-  });
+export const fetchImage = createAsyncThunk(
+  'images/fetchImage',
+  async (dataSearch: { searchItem: string; currentPage: number }) => {
+    const searchItem: string = dataSearch.searchItem;
+    const currentPage: number = dataSearch.currentPage;
+    const data = await fetch(
+      `https://api.pexels.com/v1/search?query=${searchItem}&page=${currentPage}&per_page=12&`,
+      {
+        headers: {
+          Authorization: API_KEY,
+        },
+      },
+    );
+    const { photos } = await data.json();
 
-  const { photos } = await data.json();
+    return photos;
+  },
+);
 
-  return photos;
-});
+type initialStateType = {
+  items: any[];
+  status: string;
+};
 
-const initialState = {
+const initialState: initialStateType = {
   items: [],
   status: 'loading',
 };
@@ -30,10 +42,9 @@ export const imagesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchImage.pending, (state) => {
       state.status = 'loading';
-      state.items = [];
     });
     builder.addCase(fetchImage.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.items = [...state.items, ...action.payload];
       state.status = 'success';
       if (state.items.length === 0) {
         state.status = 'nothing';

@@ -5,20 +5,21 @@ import { fetchImage } from '../redux/slices/imagesSlice';
 import { AppDispatch } from '../redux/store';
 
 function SearchForm() {
-  const [inputValue, setInputValue] = React.useState('');
+  const [searchItem, setSearchItem] = React.useState('');
+  const [currentPage, setCurrentPage] = React.useState(1);
   const dispatch = useDispatch<AppDispatch>();
 
   function searchNewInfo() {
-    if (inputValue !== '') {
-      dispatch(fetchImage(inputValue));
+    if (searchItem !== '') {
+      dispatch(fetchImage({ searchItem, currentPage }));
     }
   }
 
   return (
     <>
       <input
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        value={searchItem}
+        onChange={(e) => setSearchItem(e.target.value)}
         type="search"
         className="content-search"
         placeholder="Search for free photos and videos"
