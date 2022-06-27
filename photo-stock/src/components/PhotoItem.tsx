@@ -36,8 +36,10 @@ function PhotoItem(props: { id: number; photographer: string; key: number; src: 
               className="item-info-btn-heart"
               src={btnHeart}
               alt="btn-heart"></img>
-
-            <a className="item-info-link" href={imagesUrls.medium} download>
+            <a
+              className="item-info-link"
+              href="https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg"
+              download="dodo.jpg">
               <img src={btnDownload} alt="btn-download"></img>
             </a>
           </div>
