@@ -4,11 +4,27 @@ import btnHeart from '../assets/img/heart.png';
 import btnDownload from '../assets/img/download.png';
 
 function PhotoItem(props: { id: number; photographer: string; key: number; src: object }) {
-  const imagesUrls: { medium?: string } = props.src;
+  const imagesUrls: { medium?: string; original?: string } = props.src;
+  const originalPhoto: any = imagesUrls.original;
   const [isShown, setIsShown] = React.useState(false);
 
   function updateLike() {
     console.log(props);
+  }
+
+  function saveImg(blob: any) {
+    let link = document.createElement('a');
+    link.setAttribute('href', URL.createObjectURL(blob));
+    link.setAttribute('download', Date.now().toString());
+    console.log('done');
+    link.click();
+  }
+
+  function getImagesUrls() {
+    alert('Photo loading in progress');
+    fetch(originalPhoto)
+      .then((resp) => resp.blob())
+      .then((blob) => saveImg(blob));
   }
 
   return (
@@ -36,12 +52,9 @@ function PhotoItem(props: { id: number; photographer: string; key: number; src: 
               className="item-info-btn-heart"
               src={btnHeart}
               alt="btn-heart"></img>
-            <a
-              className="item-info-link"
-              href="https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg"
-              download="dodo.jpg">
+            <div className="item-info-link" onClick={() => getImagesUrls()}>
               <img src={btnDownload} alt="btn-download"></img>
-            </a>
+            </div>
           </div>
         </div>
       )}
