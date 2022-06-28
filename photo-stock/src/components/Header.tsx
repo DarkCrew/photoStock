@@ -3,6 +3,7 @@ import CategoryNames from './CategoryNames';
 import SearchForm from './SearchForm';
 
 const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
+let controller = new AbortController();
 
 type ImageInfo = {
   src: {
@@ -22,15 +23,23 @@ function Header() {
   }
 
   const fetchTopImagesPexels = async (url: string) => {
-    const data = await fetch(url, {
-      headers: {
-        Authorization: API_KEY,
-      },
-    });
+    try {
+      const data = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          Authorization: API_KEY,
+        },
+      });
+      const { photos } = await data.json();
 
-    const { photos } = await data.json();
-
-    return photos;
+      return photos;
+    } catch (err: any) {
+      if (err.name == 'AbortError') {
+        alert('Ошибка запроса фото');
+      } else {
+        throw err;
+      }
+    }
   };
 
   const [topImages, setTopImages] = React.useState([]);

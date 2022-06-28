@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { setCurrentPage, setItems, setSearchItems } from '../redux/slices/imagesSlice';
+
 function CategoryNames(props: { key: number; curNumber: number; curIndex: number }) {
   const arrCategoryNames: string[] = [
     'business',
@@ -44,15 +49,22 @@ function CategoryNames(props: { key: number; curNumber: number; curIndex: number
     'stone',
   ];
 
+  const dispatch = useDispatch<AppDispatch>();
+  function searchNewInfo(searchItem: string) {
+    dispatch(setSearchItems(searchItem));
+    dispatch(setItems([]));
+    dispatch(setCurrentPage());
+  }
+
   return (
     <li>
-      <a
+      <Link
         className="header-content-trending-item"
-        href="https://www.pexels.com/search/business/"
-        target="_blank"
+        to="/Category"
+        onClick={() => searchNewInfo(arrCategoryNames[props.curNumber])}
         rel="noreferrer">
         {arrCategoryNames[props.curNumber]}
-      </a>
+      </Link>
       {props.curIndex !== 6 && <span>,&nbsp;</span>}
     </li>
   );

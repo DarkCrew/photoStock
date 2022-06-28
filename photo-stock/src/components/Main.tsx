@@ -4,6 +4,7 @@ import notFoundImage from '../assets/img/not-found.svg';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchImage } from '../redux/slices/imagesSlice';
+import { changeCurrentPage } from '../redux/slices/imagesSlice';
 import { AppDispatch, RootState } from '../redux/store';
 import { useFetching } from '../hooks/useFetching';
 
@@ -13,18 +14,19 @@ type fetchObj = {
   photographer: string;
 };
 
-const searchItem = 'landscape';
-
 function Main() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const lastElement = React.useRef<HTMLDivElement>(null);
   const observer = React.useRef<IntersectionObserver | null>(null);
 
-  const { items, status } = useSelector((state: RootState) => state.imagesReducer);
+  const { items, status, currentPages, searchItem } = useSelector(
+    (state: RootState) => state.imagesReducer,
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   const [fetching, isImagesLoading, imagesError] = useFetching(async () => {
-    const fetchingImages = await dispatch(fetchImage({ searchItem, currentPage }));
+    dispatch(changeCurrentPage());
+    const fetchingImages = await dispatch(fetchImage({ currentPages, searchItem }));
   });
 
   const arrFirstColumnNumbers = [0, 1, 2, 3];

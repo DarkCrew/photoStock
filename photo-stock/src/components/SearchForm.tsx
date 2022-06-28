@@ -1,17 +1,20 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { fetchImage } from '../redux/slices/imagesSlice';
 import { AppDispatch } from '../redux/store';
+import searchIcon from '../assets/img/search.png';
+import { Link } from 'react-router-dom';
+import { setCurrentPage, setItems, setSearchItems } from '../redux/slices/imagesSlice';
 
 function SearchForm() {
   const [searchItem, setSearchItem] = React.useState('');
-  const [currentPage, setCurrentPage] = React.useState(1);
   const dispatch = useDispatch<AppDispatch>();
 
   function searchNewInfo() {
     if (searchItem !== '') {
-      dispatch(fetchImage({ searchItem, currentPage }));
+      dispatch(setItems([]));
+      dispatch(setCurrentPage());
+      dispatch(setSearchItems(searchItem));
     }
   }
 
@@ -24,13 +27,13 @@ function SearchForm() {
         className="content-search"
         placeholder="Search for free photos and videos"
       />
-      <button className="search-btn">
+      <Link to="/Category" className="search-btn">
         <img
           onClick={() => searchNewInfo()}
           className="search-btn-image"
-          src="https://cdn-icons.flaticon.com/png/512/4024/premium/4024513.png?token=exp=1655210527~hmac=6df853562d1deebd4c30d6467ec306c6"
+          src={searchIcon}
           alt="search-button"></img>
-      </button>
+      </Link>
     </>
   );
 }

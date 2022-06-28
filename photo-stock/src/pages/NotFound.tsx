@@ -3,9 +3,13 @@ import React from 'react';
 function NotFound() {
   return (
     <>
-      <div className="header">
+      <div className="not-found">
         <div className="container">
-          <h1 style={{ color: 'black', textAlign: 'center' }}>Not found 404</h1>
+          <div className="notfound-container">
+            <span className="notfound-image">&#9785;</span>
+            <h2 className="notfound-title">404</h2>
+            <p className="notfound-subtitle">Not found</p>
+          </div>
         </div>
       </div>
     </>
