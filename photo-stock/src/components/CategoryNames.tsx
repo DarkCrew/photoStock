@@ -3,7 +3,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
-import { setCurrentPage, setItems, setSearchItems } from '../redux/slices/imagesSlice';
+import {
+  changeOrientaion,
+  setCurrentPage,
+  setItems,
+  setSearchItems,
+} from '../redux/slices/imagesSlice';
 
 function CategoryNames(props: { key: number; curNumber: number; curIndex: number }) {
   const arrCategoryNames: string[] = [
@@ -54,6 +59,8 @@ function CategoryNames(props: { key: number; curNumber: number; curIndex: number
     dispatch(setSearchItems(searchItem));
     dispatch(setItems([]));
     dispatch(setCurrentPage());
+    dispatch(changeOrientaion('portrait'));
+    localStorage.setItem('searchitem', searchItem);
   }
 
   return (

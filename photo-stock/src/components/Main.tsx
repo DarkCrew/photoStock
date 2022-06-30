@@ -19,14 +19,14 @@ function Main() {
   const lastElement = React.useRef<HTMLDivElement>(null);
   const observer = React.useRef<IntersectionObserver | null>(null);
 
-  const { items, status, currentPages, searchItem } = useSelector(
+  const { items, status, currentPages, searchItem, orientation } = useSelector(
     (state: RootState) => state.imagesReducer,
   );
   const dispatch = useDispatch<AppDispatch>();
 
   const [fetching, isImagesLoading, imagesError] = useFetching(async () => {
     dispatch(changeCurrentPage());
-    const fetchingImages = await dispatch(fetchImage({ currentPages, searchItem }));
+    const fetchingImages = await dispatch(fetchImage({ currentPages, searchItem, orientation }));
   });
 
   const arrFirstColumnNumbers = [0, 1, 2, 3];

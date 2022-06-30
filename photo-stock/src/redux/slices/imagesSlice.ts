@@ -7,12 +7,23 @@ let controller = new AbortController();
 
 export const fetchImage = createAsyncThunk(
   'images/fetchImage',
-  async (dataSearch: { searchItem: string; currentPages: number }) => {
+  async (dataSearch: { searchItem: string; currentPages: number; orientation: string }) => {
     const currentPages: number = dataSearch.currentPages;
-    const searchItem: string = dataSearch.searchItem;
+    let searchItem: string | null = dataSearch.searchItem;
+    let orientation: string | null = dataSearch.orientation;
+    let sizeImage: string | null = '';
+
+    if (window.location.toString().includes('Category')) {
+      orientation = localStorage.getItem('orientation');
+      searchItem = localStorage.getItem('searchitem');
+      if (localStorage.getItem('sizeimage') !== null) {
+        sizeImage = localStorage.getItem('sizeimage');
+      }
+    }
+    console.log(orientation);
     try {
       const data = await fetch(
-        `https://api.pexels.com/v1/search?query=${searchItem}&page=${currentPages}&per_page=12&`,
+        `https://api.pexels.com/v1/search?query=${searchItem}&page=${currentPages}&per_page=12&size=${sizeImage}&orientation=${orientation}`,
         {
           signal: controller.signal,
           headers: {
@@ -38,6 +49,7 @@ type initialStateType = {
   status: string;
   searchItem: string;
   currentPages: number;
+  orientation: string;
 };
 
 const initialState: initialStateType = {
@@ -45,6 +57,7 @@ const initialState: initialStateType = {
   status: 'loading',
   searchItem: 'landscape',
   currentPages: 1,
+  orientation: '',
 };
 
 export const imagesSlice = createSlice({
@@ -62,6 +75,9 @@ export const imagesSlice = createSlice({
     },
     setSearchItems(state, action) {
       state.searchItem = action.payload;
+    },
+    changeOrientaion(state, action) {
+      state.orientation = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -83,6 +99,7 @@ export const imagesSlice = createSlice({
   },
 });
 
-export const { setItems, changeCurrentPage, setCurrentPage, setSearchItems } = imagesSlice.actions;
+export const { setItems, changeCurrentPage, setCurrentPage, setSearchItems, changeOrientaion } =
+  imagesSlice.actions;
 
 export default imagesSlice.reducer;

@@ -95,7 +95,19 @@ a {
   border: 2px solid var(--color-gray);
   border-radius: 15px;
   padding: 7px 14px;
+  user-select: none;
+}
+
+.category-select {
+  font-size: 15px;
+  color: var(--color-gray);
+  border: 0;
   cursor: pointer;
+}
+
+.category-select option {
+  font-size: 15px;
+  color: var(--color-gray);
 }
 
 .category-photo {

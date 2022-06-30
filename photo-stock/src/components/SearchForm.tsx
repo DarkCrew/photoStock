@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import searchIcon from '../assets/img/search.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCurrentPage, setItems, setSearchItems } from '../redux/slices/imagesSlice';
+import {
+  setCurrentPage,
+  setItems,
+  setSearchItems,
+  changeOrientaion,
+} from '../redux/slices/imagesSlice';
 
 function SearchForm() {
   const { searchItem } = useSelector((state: RootState) => state.imagesReducer);
@@ -16,13 +21,14 @@ function SearchForm() {
     if (searchItem !== '') {
       dispatch(setItems([]));
       dispatch(setCurrentPage());
+      dispatch(changeOrientaion('portrait'));
+      localStorage.setItem('searchitem', searchItem);
       navigate('/Category');
     }
   }
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLElement>) => {
     if (searchItem !== '' && event.key === 'Enter') {
-      navigate('/Category');
       searchNewInfo();
     }
   };
