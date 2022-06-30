@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { stat } from 'fs';
 
 const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
 
@@ -20,7 +19,7 @@ export const fetchImage = createAsyncThunk(
         sizeImage = localStorage.getItem('sizeimage');
       }
     }
-    console.log(orientation);
+
     try {
       const data = await fetch(
         `https://api.pexels.com/v1/search?query=${searchItem}&page=${currentPages}&per_page=12&size=${sizeImage}&orientation=${orientation}`,

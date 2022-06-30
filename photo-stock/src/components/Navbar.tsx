@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchForm from './SearchForm';
 
 import logo from '../assets/img/pexels-logo.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import {

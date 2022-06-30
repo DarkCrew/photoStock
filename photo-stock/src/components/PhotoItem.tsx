@@ -9,13 +9,11 @@ function PhotoItem(props: { id: number; photographer: string; key: number; src: 
   const [isShown, setIsShown] = React.useState(false);
 
   function updateLike() {
-    console.log(localStorage.getItem(props.id.toString()) === 'true');
     if (localStorage.getItem(props.id.toString()) === 'true') {
       localStorage.removeItem(props.id.toString());
     } else {
       localStorage.setItem(props.id.toString(), 'true');
     }
-    console.log(localStorage.getItem(props.id.toString()));
   }
 
   function saveImg(blob: any) {

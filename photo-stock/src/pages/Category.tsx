@@ -2,18 +2,8 @@ import React from 'react';
 import Main from '../components/Main';
 
 import photoSize from '../assets/img/photosize.png';
-import orientation_standart from '../assets/img/orientation_standart.png';
 import orientation_port from '../assets/img/orientation_port.png';
 import orientation_land from '../assets/img/orientation_land.png';
-import {
-  changeOrientaion,
-  fetchImage,
-  setCurrentPage,
-  setItems,
-  setSearchItems,
-} from '../redux/slices/imagesSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../redux/store';
 
 function Category() {
   const [orientation, setOrientation] = React.useState(
