@@ -1,39 +1,49 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../redux/store';
 import searchIcon from '../assets/img/search.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCurrentPage, setItems, setSearchItems } from '../redux/slices/imagesSlice';
 
 function SearchForm() {
-  const [searchItem, setSearchItem] = React.useState('');
+  const { searchItem } = useSelector((state: RootState) => state.imagesReducer);
+
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   function searchNewInfo() {
     if (searchItem !== '') {
       dispatch(setItems([]));
       dispatch(setCurrentPage());
-      dispatch(setSearchItems(searchItem));
+      navigate('/Category');
     }
   }
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (searchItem !== '' && event.key === 'Enter') {
+      navigate('/Category');
+      searchNewInfo();
+    }
+  };
 
   return (
     <>
       <input
         value={searchItem}
-        onChange={(e) => setSearchItem(e.target.value)}
+        onKeyPress={handleKeyPress}
+        onChange={(e) => dispatch(setSearchItems(e.target.value))}
         type="search"
         className="content-search"
         placeholder="Search for free photos and videos"
       />
-      <Link to="/Category" className="search-btn">
+      <div className="search-btn">
         <img
           onClick={() => searchNewInfo()}
           className="search-btn-image"
           src={searchIcon}
           alt="search-button"></img>
-      </Link>
+      </div>
     </>
   );
 }

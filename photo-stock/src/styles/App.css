@@ -54,7 +54,7 @@ a {
 
 .notfound-subtitle {
   color: var(--color-dark-gray);
-  font-size: 60px;
+  font-size: 30px;
 }
 
 /* NOT-FOUND-END */
@@ -505,6 +505,10 @@ a {
 }
 
 .item-info-btns img:hover {
+  background-color: var(--color-green);
+}
+
+.item-info-btn-heart.active {
   background-color: var(--color-green);
 }
 

@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { stat } from 'fs';
 
 const API_KEY = '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf';
+
 let controller = new AbortController();
 
 export const fetchImage = createAsyncThunk(
@@ -24,7 +25,7 @@ export const fetchImage = createAsyncThunk(
       return photos;
     } catch (err: any) {
       if (err.name == 'AbortError') {
-        alert('Ошибка запроса фото');
+        window.location.href = 'no-results';
       } else {
         throw err;
       }
@@ -72,6 +73,7 @@ export const imagesSlice = createSlice({
       state.status = 'success';
       if (state.items.length === 0) {
         state.status = 'nothing';
+        controller.abort();
       }
     });
     builder.addCase(fetchImage.rejected, (state, action) => {

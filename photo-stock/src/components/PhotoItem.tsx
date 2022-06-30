@@ -9,14 +9,19 @@ function PhotoItem(props: { id: number; photographer: string; key: number; src: 
   const [isShown, setIsShown] = React.useState(false);
 
   function updateLike() {
-    console.log(props);
+    console.log(localStorage.getItem(props.id.toString()) === 'true');
+    if (localStorage.getItem(props.id.toString()) === 'true') {
+      localStorage.removeItem(props.id.toString());
+    } else {
+      localStorage.setItem(props.id.toString(), 'true');
+    }
+    console.log(localStorage.getItem(props.id.toString()));
   }
 
   function saveImg(blob: any) {
     let link = document.createElement('a');
     link.setAttribute('href', URL.createObjectURL(blob));
     link.setAttribute('download', Date.now().toString());
-    console.log('done');
     link.click();
   }
 
@@ -49,7 +54,11 @@ function PhotoItem(props: { id: number; photographer: string; key: number; src: 
           <div className="item-info-btns">
             <img
               onClick={updateLike}
-              className="item-info-btn-heart"
+              className={
+                localStorage.getItem(props.id.toString()) === 'true'
+                  ? 'item-info-btn-heart active'
+                  : 'item-info-btn-heart'
+              }
               src={btnHeart}
               alt="btn-heart"></img>
             <div className="item-info-link" onClick={() => getImagesUrls()}>
