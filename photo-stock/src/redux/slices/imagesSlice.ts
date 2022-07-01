@@ -30,9 +30,9 @@ export const fetchImage = createAsyncThunk(
           },
         },
       );
-      const { photos } = await data.json();
+      const { photos, total_results } = await data.json();
 
-      return photos;
+      return { photos, total_results };
     } catch (err: any) {
       if (err.name == 'AbortError') {
         window.location.href = 'no-results';
@@ -49,6 +49,7 @@ type initialStateType = {
   searchItem: string;
   currentPages: number;
   orientation: string;
+  totalResults: number;
 };
 
 const initialState: initialStateType = {
@@ -57,6 +58,7 @@ const initialState: initialStateType = {
   searchItem: 'landscape',
   currentPages: 1,
   orientation: '',
+  totalResults: 0,
 };
 
 export const imagesSlice = createSlice({
@@ -84,8 +86,9 @@ export const imagesSlice = createSlice({
       state.status = 'loading';
     });
     builder.addCase(fetchImage.fulfilled, (state, action) => {
-      state.items = [...state.items, ...action.payload];
+      state.items = [...state.items, ...action.payload?.photos];
       state.status = 'success';
+      state.totalResults = action.payload?.total_results;
       if (state.items.length === 0) {
         state.status = 'nothing';
         controller.abort();

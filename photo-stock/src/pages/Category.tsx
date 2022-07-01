@@ -39,7 +39,7 @@ function Category() {
         <div className="container">
           <div className="category-container">
             <ul className="category-filters">
-              <li className="category-filters-item" onClick={changeOrientation}>
+              <li className="category-filters-item orientation" onClick={changeOrientation}>
                 <img className="category-photo" src={orientation} alt="orientation"></img>
                 Orientation
               </li>

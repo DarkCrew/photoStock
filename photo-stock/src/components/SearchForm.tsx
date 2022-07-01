@@ -17,6 +17,15 @@ function SearchForm() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (
+      window.location.toString().includes('Category') &&
+      localStorage.getItem('searchitem') !== null
+    ) {
+      dispatch(setSearchItems(localStorage.getItem('searchitem')));
+    }
+  }, []);
+
   function searchNewInfo() {
     if (searchItem !== '') {
       dispatch(setItems([]));

@@ -12,6 +12,7 @@ type fetchObj = {
   id: 1;
   src: {};
   photographer: string;
+  photographer_url: string;
 };
 
 function Main() {
@@ -19,9 +20,10 @@ function Main() {
   const lastElement = React.useRef<HTMLDivElement>(null);
   const observer = React.useRef<IntersectionObserver | null>(null);
 
-  const { items, status, currentPages, searchItem, orientation } = useSelector(
+  const { items, status, currentPages, searchItem, orientation, totalResults } = useSelector(
     (state: RootState) => state.imagesReducer,
   );
+
   const dispatch = useDispatch<AppDispatch>();
 
   const [fetching, isImagesLoading, imagesError] = useFetching(async () => {
@@ -40,7 +42,7 @@ function Main() {
     if (isImagesLoading) return;
     if (observer.current) observer.current.disconnect();
     const callback = function (entries: any) {
-      if (entries[0].isIntersecting && currentPage < 665) {
+      if (entries[0].isIntersecting && currentPage <= Math.floor(totalResults / 12) + 1) {
         setCurrentPage(currentPage + 1);
         setArrFirstColumn([
           ...arrFirstColumn,
@@ -60,6 +62,10 @@ function Main() {
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(lastElement.current as Element);
   }, [isImagesLoading]);
+
+  if (status === 'nothing') {
+    window.location.href = 'no-results';
+  }
 
   return (
     <main className="main">

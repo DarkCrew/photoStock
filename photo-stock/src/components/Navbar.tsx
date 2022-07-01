@@ -17,7 +17,7 @@ function Navbar() {
   const navigate = useNavigate();
 
   const changeNavbarBackground = () => {
-    window.scrollY > 80 ? setNavbar(true) : setNavbar(false);
+    window.scrollY > 10 ? setNavbar(true) : setNavbar(false);
   };
 
   window.addEventListener('scroll', changeNavbarBackground);

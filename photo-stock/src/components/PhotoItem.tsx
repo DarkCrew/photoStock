@@ -3,7 +3,13 @@ import React from 'react';
 import btnHeart from '../assets/img/heart.png';
 import btnDownload from '../assets/img/download.png';
 
-function PhotoItem(props: { id: number; photographer: string; key: number; src: object }) {
+function PhotoItem(props: {
+  id: number;
+  photographer: string;
+  photographer_url: string;
+  key: number;
+  src: object;
+}) {
   const imagesUrls: { medium?: string; original?: string } = props.src;
   const originalPhoto: any = imagesUrls.original;
   const [isShown, setIsShown] = React.useState(false);
@@ -47,7 +53,9 @@ function PhotoItem(props: { id: number; photographer: string; key: number; src: 
             <img
               src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
               alt="item-photos-autor"></img>
-            <p>{props.photographer}</p>
+            <a href={props.photographer_url} target="_blank" rel="noreferrer">
+              {props.photographer}
+            </a>
           </div>
           <div className="item-info-btns">
             <img

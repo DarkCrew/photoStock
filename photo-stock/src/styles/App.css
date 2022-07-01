@@ -98,6 +98,10 @@ a {
   user-select: none;
 }
 
+.category-filters-item.orientation {
+  cursor: pointer;
+}
+
 .category-select {
   font-size: 15px;
   color: var(--color-gray);
